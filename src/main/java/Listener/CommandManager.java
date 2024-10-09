@@ -8,7 +8,7 @@ import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import commands.NewtonCommand;
 import commands.ClearCommand;
 import commands.ServerCommand;
-
+import commands.IterationsCommand;
 
 
 public class CommandManager {
@@ -19,7 +19,8 @@ public class CommandManager {
 		this.commands = new ConcurrentHashMap<>(); 
 		
 		this.commands.put("clear", new ClearCommand());
-		this.commands.put("newton", new NewtonCommand()); 
+		this.commands.put("newton", new NewtonCommand());
+		this.commands.put("iteration", new IterationsCommand()); 
 	}
 	public boolean perform(String command, Member m, TextChannel channel, Message message) {
 		

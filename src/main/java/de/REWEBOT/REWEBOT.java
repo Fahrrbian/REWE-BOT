@@ -35,7 +35,7 @@ public class REWEBOT {
 	public REWEBOT() throws LoginException, IllegalArgumentException {
 		INSTANCE = this; 
 		
-		DefaultShardManagerBuilder builder = DefaultShardManagerBuilder.createDefault(" "); 
+		DefaultShardManagerBuilder builder = DefaultShardManagerBuilder.createDefault(""); 
 		
 		builder.enableIntents(GatewayIntent.MESSAGE_CONTENT); 
         builder.setActivity(Activity.playing("Bereit zum Rechnen."));
