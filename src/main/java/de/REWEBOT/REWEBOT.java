@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 
 import javax.security.auth.login.LoginException;
 
+import Database.DatabaseManager;
 import Listener.CommandListener;
 import Listener.CommandManager;
 import commands.ClearCommand; 
@@ -19,6 +20,7 @@ public class REWEBOT {
 	
 	public static REWEBOT INSTANCE; 
 	
+	private static DatabaseManager dbManager; 
 	public ShardManager shardManager;
 	private CommandManager cmdMan; 
 	private Thread loop;
@@ -48,6 +50,7 @@ public class REWEBOT {
         // Baue den ShardManager
         shardManager= builder.build();
         System.out.println("Bot online");
+        REWEBOT.connectToDatabase(); 
         
         shutdown(); 
         //runLoop();
@@ -83,5 +86,13 @@ public class REWEBOT {
 	   public CommandManager getCmdMan() {
 	    	return cmdMan; 
 	    }
-	
+	   private static void connectToDatabase() {
+		   try {
+			dbManager = new DatabaseManager();
+			dbManager.connect(); 
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	   }
 }

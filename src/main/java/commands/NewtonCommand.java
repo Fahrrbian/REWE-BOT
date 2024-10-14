@@ -68,8 +68,7 @@ public class NewtonCommand implements ServerCommand  {
 	        System.out.println("Maximale Anzahl an Iterationen erreicht. Keine Nullstelle gefunden.");channel.sendMessage("Maximale Anzahl an Iterationen erreicht. Keine Nullstelle gefunden.").queue();	        
 	    }
 	
-	private Function<Double, Double> createFunction(String expression) {
-		//ScriptEngine engine = new ScriptEngineManager().getEngineByName("JavaScript"); 
+	private Function<Double, Double> createFunction(String expression) { 
 		return(x) -> {
 			Expression expr = new ExpressionBuilder(expression)
 					.variable("x")

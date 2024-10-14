@@ -1,16 +1,20 @@
 package Listener;
 
 import java.text.SimpleDateFormat;
+
 import java.util.Calendar;
+
 
 import de.REWEBOT.REWEBOT;
 import net.dv8tion.jda.api.entities.channel.ChannelType;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.objecthunter.exp4j.Expression;
+import net.objecthunter.exp4j.ExpressionBuilder;
 
 public class CommandListener extends ListenerAdapter {
-
+ 
 	
 	@Override
 	public void onMessageReceived(MessageReceivedEvent event) {
@@ -24,10 +28,7 @@ public class CommandListener extends ListenerAdapter {
 	
 	 	if (event.getAuthor().isBot()) {
 	 	    return;  // Ignoriere Nachrichten von Bots
-	 	 }
-	 		
-	    
-		
+	 	 }	 			   
 		 
 	    if (event.isFromType(ChannelType.TEXT)) {
 	        TextChannel channel = event.getChannel().asTextChannel();
@@ -39,10 +40,23 @@ public class CommandListener extends ListenerAdapter {
 	            	if(!REWEBOT.INSTANCE.getCmdMan().perform(args[0], event.getMember() , channel, event.getMessage())) {
 	            		channel.sendMessage("Unbekanntes Kommando").queue(); 
 	            	}
-	            }
-
-	        	
-	        }	
-	    }
+	            	 if (args[0].equalsIgnoreCase("save")) {
+	                     String expression = args.length > 2 ? args[2] : "";
+	            	
+	            	 try {
+	                        if (!expression.contains("x^-")) {
+	                           	                        
+	                            Expression exp = new ExpressionBuilder(expression)
+	                                .variable("x")
+	                                .build();	                            	                         	                            
+	                        }
+	                    } catch (Exception e) {
+	                        channel.sendMessage("Ungültiger mathematischer Ausdruck: " + e.getMessage()).queue();
+	                        e.printStackTrace();
+	                    }
+	            	 }
+	            }	        	
+	        }		        
+	    }		    
 	}
 }
