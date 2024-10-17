@@ -1,6 +1,7 @@
 package commands;
 
 import net.objecthunter.exp4j.Expression;
+
 import net.objecthunter.exp4j.ExpressionBuilder;
 import java.util.List;
 import java.util.function.Function;
@@ -8,16 +9,26 @@ import java.util.function.Function;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 
+import Database.DatabaseManager;
+import Database.FunctionManager;
+import Database.ResultManager;
+
+import interfaces.ServerCommand;
+import master.BaseCommand;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Mentions;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 
-public class NewtonCommand implements ServerCommand  {
+public class NewtonCommand extends BaseCommand implements ServerCommand  {
 
+	
+	
 	@Override
 	public void performCommand(Member m, TextChannel channel, Message message) {
 		// TODO Auto-generated method stub
+		
+		
 		
 		Mentions mentions = message.getMentions(); 
 		
@@ -49,6 +60,12 @@ public class NewtonCommand implements ServerCommand  {
 	            // Abbruchbedingung: Wenn der Funktionswert nahe genug bei Null ist
 	            if (Math.abs(fxn) < tol) {
 	                channel.sendMessage("Die Nullstelle ist: " + String.format("%.4f", xn)).queue();
+	                try {
+	                	this.resultManager.autoSave(xn);
+	                	channel.sendMessage("Ergebnis hinzugefügt " + xn).queue();
+	                } catch(Exception e) {
+	                	e.printStackTrace();
+	                }
 	                return;
 	            }
 
@@ -56,7 +73,7 @@ public class NewtonCommand implements ServerCommand  {
 
 	            // Wenn die Ableitung null ist, kann das Verfahren nicht fortfahren
 	            if (dfxn == 0.0) {
-	            	channel.sendMessage("Ableitung ist Null. Keine Nullstelle gefunden.").queue();
+	            	channel.sendMessage("Ableitung ist Null. Keine Nullstelle gefunden.").queue();	       
 	                return;  // Rückgabe von "NaN" (Not-a-Number) im Fehlerfall
 	            }
 
@@ -76,7 +93,5 @@ public class NewtonCommand implements ServerCommand  {
 					.setVariable("x", x); 
 			return expr.evaluate(); 
 		}; 
-	}
-			
-		
+	}		
 }

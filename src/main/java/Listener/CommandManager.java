@@ -7,9 +7,9 @@ import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 
 import commands.NewtonCommand;
 import commands.SaveFunctionCommand;
+import interfaces.ServerCommand;
 import commands.ClearCommand;
 import commands.DBTestCommand;
-import commands.ServerCommand;
 import commands.IterationsCommand;
 
 

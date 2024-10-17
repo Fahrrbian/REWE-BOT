@@ -14,7 +14,8 @@ public class FunctionManager {
 	    public void addFunction(String name, String expression) {
 	        String sql = "INSERT INTO functions (name, expression) VALUES (?, ?)";
 	        Connection conn = dbManager.getConnection();
-	        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {	            	           pstmt.setString(1, name);
+	        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {	            	           
+	        	pstmt.setString(1, name);
 	            pstmt.setString(2, expression);
 	            pstmt.executeUpdate();
 	            conn.commit();

@@ -21,7 +21,7 @@ public class DatabaseManager {
 	
     public void connect() {
         // SQLite connection string
-        String url = "";
+    	String url = "";
         
         try {
             conn = DriverManager.getConnection(url);

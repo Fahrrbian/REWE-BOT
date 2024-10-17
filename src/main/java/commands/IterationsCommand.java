@@ -3,6 +3,8 @@ package commands;
 import java.util.List;
 import java.util.function.Function;
 
+import interfaces.ServerCommand;
+import master.BaseCommand;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Mentions;
 import net.dv8tion.jda.api.entities.Message;
@@ -10,7 +12,7 @@ import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 
-public class IterationsCommand implements ServerCommand {
+public class IterationsCommand extends BaseCommand implements ServerCommand {
 
 	@Override
 	public void performCommand(Member m, TextChannel channel, Message message) {
@@ -54,7 +56,7 @@ public class IterationsCommand implements ServerCommand {
 			                a = c; // Nullstelle im rechten Intervall
 			            }
 			        }
-
+			        this.resultManager.autoSave(c);
 			        channel.sendMessage("Die Nullstelle ist: "+ String.format("%.4f%n", c)).queue();
 			        
 			    
