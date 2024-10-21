@@ -3,6 +3,10 @@ package Database;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.function.Function;
+
+import net.objecthunter.exp4j.Expression;
+import net.objecthunter.exp4j.ExpressionBuilder;
 
 public class FunctionManager {
 	 private DatabaseManager dbManager;
@@ -24,4 +28,14 @@ public class FunctionManager {
 	            System.out.println(e.getMessage());
 	        }
 	    }
-}
+	    public static Function<Double, Double> createFunction(String expression) {
+			//ScriptEngine engine = new ScriptEngineManager().getEngineByName("JavaScript"); 
+			return(x) -> {
+				Expression expr = new ExpressionBuilder(expression)
+						.variable("x")
+						.build()
+						.setVariable("x", x); 
+				return expr.evaluate(); 
+			}; 
+		}
+	}

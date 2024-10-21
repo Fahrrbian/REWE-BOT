@@ -2,6 +2,7 @@ package commands;
 
 
 import java.util.List;
+import java.util.Map;
 
 import Database.DatabaseManager;
 import Database.SelectManager;
@@ -18,10 +19,10 @@ public class ViewFunctionsCommand extends BaseCommand implements ServerCommand{
 		// TODO Auto-generated method stub
 	
 		try {
-			List<String> funcitonNames = SelectManager.selectLast10(dbManager);
+			Map<String, String> functionNames = SelectManager.selectLast10(dbManager);
 			
-			for (String name : funcitonNames) {
-				channel.sendMessage("Function Name: " + name).queue();
+			for (Map.Entry<String, String> entry : functionNames.entrySet()) {
+				channel.sendMessage("Function Name: " + entry.getKey() + ", Function: "  + entry.getValue()).queue();
 			}
 		} catch(Exception e) {
 			channel.sendMessage("Fehler ").queue(); 

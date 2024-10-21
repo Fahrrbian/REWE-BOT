@@ -3,6 +3,7 @@ package commands;
 import java.util.List;
 import java.util.function.Function;
 
+import Database.FunctionManager;
 import interfaces.ServerCommand;
 import master.BaseCommand;
 import net.dv8tion.jda.api.entities.Member;
@@ -14,6 +15,7 @@ import net.objecthunter.exp4j.ExpressionBuilder;
 
 public class IterationsCommand extends BaseCommand implements ServerCommand {
 
+	 
 	@Override
 	public void performCommand(Member m, TextChannel channel, Message message) {
 		// TODO Auto-generated method stub
@@ -36,7 +38,7 @@ public class IterationsCommand extends BaseCommand implements ServerCommand {
 			double a = Double.parseDouble(args[1]); 
 			double b = Double.parseDouble(args[2]); 
 			double tol = Integer.parseInt(args[3]); 
-			Function<Double, Double> f = createFunction(args[4]); 
+			Function<Double, Double> f = FunctionManager.createFunction(args[4]); 
 			
 			if (f.apply(a) * f.apply(b) >= 0) {
 		         channel.sendMessage("Keine Nullstelle gefunden, da f(a) und f(b) das gleiche Vorzeichen haben.").queue();
@@ -57,20 +59,7 @@ public class IterationsCommand extends BaseCommand implements ServerCommand {
 			            }
 			        }
 			        this.resultManager.autoSave(c);
-			        channel.sendMessage("Die Nullstelle ist: "+ String.format("%.4f%n", c)).queue();
-			        
-			    
+			        channel.sendMessage("Die Nullstelle ist: "+ String.format("%.4f%n", c)).queue();			        		   
 	}
-	private Function<Double, Double> createFunction(String expression) {
-		//ScriptEngine engine = new ScriptEngineManager().getEngineByName("JavaScript"); 
-		return(x) -> {
-			Expression expr = new ExpressionBuilder(expression)
-					.variable("x")
-					.build()
-					.setVariable("x", x); 
-			return expr.evaluate(); 
-		}; 
-	}
-	
 }
 

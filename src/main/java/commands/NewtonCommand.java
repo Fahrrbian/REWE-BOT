@@ -49,8 +49,8 @@ public class NewtonCommand extends BaseCommand implements ServerCommand  {
 			double x0 = Double.parseDouble(args[1]); 
 			double tol = Double.parseDouble(args[2]); 
 			int maxIter = Integer.parseInt(args[3]); 
-			Function<Double, Double> f = createFunction(args[4]); 
-			Function<Double, Double> df =  createFunction(args[5]);
+			Function<Double, Double> f = FunctionManager.createFunction(args[4]); 
+			Function<Double, Double> df =  FunctionManager.createFunction(args[5]);
 			
 			double xn = x0; 
 			
@@ -84,14 +84,4 @@ public class NewtonCommand extends BaseCommand implements ServerCommand  {
 	        // Wenn die maximale Anzahl an Iterationen erreicht wird
 	        System.out.println("Maximale Anzahl an Iterationen erreicht. Keine Nullstelle gefunden.");channel.sendMessage("Maximale Anzahl an Iterationen erreicht. Keine Nullstelle gefunden.").queue();	        
 	    }
-	
-	private Function<Double, Double> createFunction(String expression) { 
-		return(x) -> {
-			Expression expr = new ExpressionBuilder(expression)
-					.variable("x")
-					.build()
-					.setVariable("x", x); 
-			return expr.evaluate(); 
-		}; 
-	}		
 }
