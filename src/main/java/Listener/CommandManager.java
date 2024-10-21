@@ -12,7 +12,10 @@ import interfaces.ServerCommand;
 import commands.ClearCommand;
 import commands.DBTestCommand;
 import commands.IterationsCommand;
+import commands.LogarithmusCommand;
 import commands.ViewFunctionsCommand;
+import commands.ViewResultsCommand;
+import commands.NLogarithmusCommand;
 
 public class CommandManager {
 	
@@ -26,7 +29,10 @@ public class CommandManager {
 		this.commands.put("iteration", new IterationsCommand()); 
 		this.commands.put("save", new SaveFunctionCommand()); 
 		this.commands.put("database", new DBTestCommand());
-		this.commands.put("select", new ViewFunctionsCommand());
+		this.commands.put("functions", new ViewFunctionsCommand());
+		this.commands.put("log", new LogarithmusCommand()); 
+		this.commands.put("ln", new NLogarithmusCommand());
+		this.commands.put("ergebnisse", new ViewResultsCommand()); 
 	}
 	public boolean perform(String command, Member m, TextChannel channel, Message message) {
 		
