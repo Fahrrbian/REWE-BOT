@@ -1,11 +1,11 @@
 package commands;
 
 import java.util.List;
-import java.util.function.Function;
 
-import Database.FunctionManager;
+import java.util.function.Function;
 import interfaces.ServerCommand;
 import master.BaseCommand;
+import master.FunctionManagement;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Mentions;
 import net.dv8tion.jda.api.entities.Message;
@@ -38,7 +38,7 @@ public class IterationsCommand extends BaseCommand implements ServerCommand {
 			double a = Double.parseDouble(args[1]); 
 			double b = Double.parseDouble(args[2]); 
 			double tol = Integer.parseInt(args[3]); 
-			Function<Double, Double> f = FunctionManager.createFunction(args[4]); 
+			Function<Double, Double> f = FunctionManagement.createFunction(args[4]); 
 			
 			if (f.apply(a) * f.apply(b) >= 0) {
 		         channel.sendMessage("Keine Nullstelle gefunden, da f(a) und f(b) das gleiche Vorzeichen haben.").queue();

@@ -19,7 +19,7 @@ public class ViewFunctionsCommand extends BaseCommand implements ServerCommand{
 		// TODO Auto-generated method stub
 	
 		try {
-			Map<String, String> functionNames = SelectManager.selectLast10(dbManager);
+			Map<String, String> functionNames = SelectManager.selectLast10Functions(dbManager);
 			
 			for (Map.Entry<String, String> entry : functionNames.entrySet()) {
 				channel.sendMessage("Function Name: " + entry.getKey() + ", Function: "  + entry.getValue()).queue();

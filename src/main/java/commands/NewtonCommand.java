@@ -2,6 +2,7 @@ package commands;
 
 import net.objecthunter.exp4j.Expression;
 
+
 import net.objecthunter.exp4j.ExpressionBuilder;
 import java.util.List;
 import java.util.function.Function;
@@ -10,11 +11,11 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 
 import Database.DatabaseManager;
-import Database.FunctionManager;
 import Database.ResultManager;
 
 import interfaces.ServerCommand;
 import master.BaseCommand;
+import master.FunctionManagement;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Mentions;
 import net.dv8tion.jda.api.entities.Message;
@@ -49,8 +50,8 @@ public class NewtonCommand extends BaseCommand implements ServerCommand  {
 			double x0 = Double.parseDouble(args[1]); 
 			double tol = Double.parseDouble(args[2]); 
 			int maxIter = Integer.parseInt(args[3]); 
-			Function<Double, Double> f = FunctionManager.createFunction(args[4]); 
-			Function<Double, Double> df =  FunctionManager.createFunction(args[5]);
+			Function<Double, Double> f = FunctionManagement.createFunction(args[4]); 
+			Function<Double, Double> df =  FunctionManagement.createFunction(args[5]);
 			
 			double xn = x0; 
 			

@@ -10,13 +10,12 @@ public abstract class BaseCommand {
 	protected DatabaseManager dbManager; 
 	protected ResultManager resultManager; 
 	protected FunctionManager functionManager; 
-	protected SelectManager selectManager; 
-	
+	protected SelectManager selectManager;
+	 
 	public BaseCommand() {
 		this.dbManager = ServiceLocator.getDatabaseManager(); 
 		this.functionManager = new FunctionManager(dbManager); 
 		this.resultManager = new ResultManager(dbManager);
-		this.selectManager = new SelectManager(dbManager); 
-		
+		this.selectManager = new SelectManager(dbManager);  
 	}
 }

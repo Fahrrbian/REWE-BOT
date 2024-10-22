@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 
 import commands.NewtonCommand;
+import commands.PlotCommand;
 import commands.SaveFunctionCommand;
 import interfaces.ServerCommand;
 import commands.ClearCommand;
@@ -32,7 +33,8 @@ public class CommandManager {
 		this.commands.put("functions", new ViewFunctionsCommand());
 		this.commands.put("log", new LogarithmusCommand()); 
 		this.commands.put("ln", new NLogarithmusCommand());
-		this.commands.put("ergebnisse", new ViewResultsCommand()); 
+		this.commands.put("ergebnisse", new ViewResultsCommand());
+		this.commands.put("chart", new PlotCommand()); 
 	}
 	public boolean perform(String command, Member m, TextChannel channel, Message message) {
 		

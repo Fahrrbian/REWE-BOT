@@ -28,14 +28,4 @@ public class FunctionManager {
 	            System.out.println(e.getMessage());
 	        }
 	    }
-	    public static Function<Double, Double> createFunction(String expression) {
-			//ScriptEngine engine = new ScriptEngineManager().getEngineByName("JavaScript"); 
-			return(x) -> {
-				Expression expr = new ExpressionBuilder(expression)
-						.variable("x")
-						.build()
-						.setVariable("x", x); 
-				return expr.evaluate(); 
-			}; 
-		}
 	}
